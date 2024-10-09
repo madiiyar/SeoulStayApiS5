@@ -1,0 +1,6 @@
+@SeoulStayApiS5_HostAddress = http://localhost:5231
+
+GET {{SeoulStayApiS5_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
