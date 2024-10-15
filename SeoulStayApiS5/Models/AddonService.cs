@@ -1,7 +1,8 @@
-﻿using System;
+﻿using SeoulStayApiS5.Models;
+using System;
 using System.Collections.Generic;
 
-namespace SeoulStayApiS5.Models;
+namespace SeoulStayApiS5.Modelss;
 
 public partial class AddonService
 {

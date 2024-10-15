@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SeoulStayApiS5.Models;
+using SeoulStayApiS5.Modelss;
 
 namespace SeoulStayApiS5.Controller
 {

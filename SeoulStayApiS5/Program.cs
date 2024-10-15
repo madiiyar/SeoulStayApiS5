@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SeoulStayApiS5.Models;
+using SeoulStayApiS5.Modelss;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SeoulStayApiS5.Models;
 
-namespace SeoulStayApiS5.Models;
+namespace SeoulStayApiS5.Modelss;
 
 public partial class SeoulStayMobileS5Context : DbContext
 {
@@ -62,6 +63,8 @@ public partial class SeoulStayMobileS5Context : DbContext
     public virtual DbSet<TransactionType> TransactionTypes { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserPurchase> UserPurchases { get; set; }
 
     public virtual DbSet<UserType> UserTypes { get; set; }
 
@@ -456,6 +459,20 @@ public partial class SeoulStayMobileS5Context : DbContext
                 .HasForeignKey(d => d.UserTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Users_UserTypes");
+        });
+
+        modelBuilder.Entity<UserPurchase>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UserPurc__3214EC2749BBCD1E");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Refunded).HasMaxLength(10);
+            entity.Property(e => e.Service)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.UserNotes).HasMaxLength(2000);
         });
 
         modelBuilder.Entity<UserType>(entity =>

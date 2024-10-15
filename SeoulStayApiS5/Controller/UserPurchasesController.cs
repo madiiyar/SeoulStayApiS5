@@ -11,47 +11,47 @@ namespace SeoulStayApiS5.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicesController : ControllerBase
+    public class UserPurchasesController : ControllerBase
     {
         private readonly SeoulStayMobileS5Context _context;
 
-        public ServicesController(SeoulStayMobileS5Context context)
+        public UserPurchasesController(SeoulStayMobileS5Context context)
         {
             _context = context;
         }
 
-        // GET: api/Services
+        // GET: api/UserPurchases
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Service>>> GetServices()
+        public async Task<ActionResult<IEnumerable<UserPurchase>>> GetUserPurchases()
         {
-            return await _context.Services.ToListAsync();
+            return await _context.UserPurchases.ToListAsync();
         }
 
-        // GET: api/Services/5
+        // GET: api/UserPurchases/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Service>> GetService(long id)
+        public async Task<ActionResult<UserPurchase>> GetUserPurchase(long id)
         {
-            var service = await _context.Services.FindAsync(id);
+            var userPurchase = await _context.UserPurchases.FindAsync(id);
 
-            if (service == null)
+            if (userPurchase == null)
             {
                 return NotFound();
             }
 
-            return service;
+            return userPurchase;
         }
 
-        // PUT: api/Services/5
+        // PUT: api/UserPurchases/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutService(long id, Service service)
+        public async Task<IActionResult> PutUserPurchase(long id, UserPurchase userPurchase)
         {
-            if (id != service.Id)
+            if (id != userPurchase.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(service).State = EntityState.Modified;
+            _context.Entry(userPurchase).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace SeoulStayApiS5.Controller
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServiceExists(id))
+                if (!UserPurchaseExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace SeoulStayApiS5.Controller
             return NoContent();
         }
 
-        // POST: api/Services
+        // POST: api/UserPurchases
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Service>> PostService(Service service)
+        public async Task<ActionResult<UserPurchase>> PostUserPurchase(UserPurchase userPurchase)
         {
-            _context.Services.Add(service);
+            _context.UserPurchases.Add(userPurchase);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetService", new { id = service.Id }, service);
+            return CreatedAtAction("GetUserPurchase", new { id = userPurchase.Id }, userPurchase);
         }
 
-        // DELETE: api/Services/5
+        // DELETE: api/UserPurchases/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteService(long id)
+        public async Task<IActionResult> DeleteUserPurchase(long id)
         {
-            var service = await _context.Services.FindAsync(id);
-            if (service == null)
+            var userPurchase = await _context.UserPurchases.FindAsync(id);
+            if (userPurchase == null)
             {
                 return NotFound();
             }
 
-            _context.Services.Remove(service);
+            _context.UserPurchases.Remove(userPurchase);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ServiceExists(long id)
+        private bool UserPurchaseExists(long id)
         {
-            return _context.Services.Any(e => e.Id == id);
+            return _context.UserPurchases.Any(e => e.Id == id);
         }
     }
 }

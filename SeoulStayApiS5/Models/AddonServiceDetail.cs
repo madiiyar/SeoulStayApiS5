@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeoulStayApiS5.Modelss;
+using System;
 using System.Collections.Generic;
 
 namespace SeoulStayApiS5.Models;
