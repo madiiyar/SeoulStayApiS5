@@ -100,6 +100,26 @@ namespace SeoulStayApiS5.Controller
             return CreatedAtAction("GetUserPurchase", new { id = userPurchase.Id }, userPurchase);
         }
 
+        // DELETE: api/UserPurchases/ClearCart?userId={userId}
+        [HttpDelete("ClearCart")]
+        public async Task<IActionResult> ClearCart(long userId)
+        {
+            var userPurchases = await _context.UserPurchases
+                                              .Where(up => up.UserId == userId)
+                                              .ToListAsync();
+
+            if (!userPurchases.Any())
+            {
+                return NotFound("No purchases found for the user.");
+            }
+
+            _context.UserPurchases.RemoveRange(userPurchases);
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // Cart cleared successfully
+        }
+
+
         // DELETE: api/UserPurchases/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserPurchase(long id)
