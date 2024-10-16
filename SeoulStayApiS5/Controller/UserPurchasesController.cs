@@ -21,10 +21,27 @@ namespace SeoulStayApiS5.Controller
         }
 
         // GET: api/UserPurchases
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<IEnumerable<UserPurchase>>> GetUserPurchases()
         {
             return await _context.UserPurchases.ToListAsync();
+        }*/
+
+        // GET: api/UserPurchases?userId={userId}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserPurchase>>> GetUserPurchases([FromQuery] long userId)
+        {
+            // Fetch purchases that belong to the specific userId
+            var userPurchases = await _context.UserPurchases
+                                              .Where(up => up.UserId == userId)
+                                              .ToListAsync();
+
+            if (!userPurchases.Any())
+            {
+                return NotFound(); // No purchases found for the user
+            }
+
+            return Ok(userPurchases); // Return the filtered user purchases
         }
 
         // GET: api/UserPurchases/5
